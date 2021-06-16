@@ -1,0 +1,214 @@
+@font-face {
+    font-family: BerlinSans;
+    src: url(./fonts/BerlinSansFBDemiBold/BerlinSansFBDemiBold.ttf);
+}
+
+@font-face {
+    font-family: MyriadProBold;
+    src: url(./fonts/MyriadPro/MyriadProBold.ttf);
+}
+
+@font-face {
+    font-family: MyriadProRegular;
+    src: url(./fonts/MyriadPro/MyriadProRegular.ttf);
+}
+
+@font-face {
+    font-family: Bauhaus93;
+    src: url(./fonts/Bauhaus93/Bauhaus93Regular.ttf);
+}
+
+:root {
+    --main-color: #39b54a;
+    --body-bg: #000;
+    --txt-color: #fffefe;
+    --header-size: 127px;
+    --logo-size: 214px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: var(--txt-color);
+    font-family: MyriadProRegular;
+}
+
+header {
+    height: var(--header-size);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 98px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.logo {
+    display: block;
+    width: var(--logo-size);
+    outline: none;
+    margin-right: 170px;
+}
+
+.main-menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.main-menu a {
+    font-family: MyriadProBold;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    color: var(--txt-color);
+    text-transform: capitalize;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.main-menu > li ~ li {
+    margin-left: 74px;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    padding-top: var(--header-size);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* display: flex; */
+    padding-left: 98px;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+.hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 98;
+    padding-top: var(--header-size);
+    padding-left: 98px;
+}
+
+.slider {
+    height: 100%;
+}
+
+.slide {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+}
+
+.slide.active {
+    height: 100%;
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dish-info,
+.dish-img {
+    width: 50%;
+    position: relative;
+}
+
+.dish-img > img {
+    position: absolute;
+    /* width: 100%; */
+    width: calc(100% + 568px);
+    top: -235px;
+    left: -200px;
+    transform: translateX(450px) rotate(28deg);
+    transition: transform 1s ease-in-out;
+}
+
+.slide.active .dish-img > img {
+    transform: translateX(0) rotate(0);
+}
+
+.dish-name > h1 {
+    font-family: BerlinSans;
+    text-transform: capitalize;
+    font-size: 290px;
+    font-weight: 600;
+    width: max-content;
+}
+
+.dish-description > p {
+    font-size: 23.76px;
+    line-height: 36px;
+}
+
+.dish-description,
+.btn {
+    margin-top: 60px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--txt-color);
+    width: 336px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: var(--main-color);
+    font-family: Bauhaus93;
+    font-size: 30px;
+    text-transform: uppercase;
+    box-shadow: 0 0 54px 6px #000;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-10px);
+}
+
+.slider-control {
+    display: flex;
+    width: max-content;
+    position: absolute;
+    z-index: 98;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider-control-item {
+    --size: 80px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider-control-item ~ .slider-control-item {
+    margin-left: 30px;
+}
+
+.slider-control-item > img {
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.slider-control-item:hover > img {
+    transform: translateY(-10px) rotate(10deg);
+}
