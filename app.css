@@ -30,6 +30,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -73,6 +74,7 @@ header {
     text-transform: capitalize;
     font-size: 30px;
     font-weight: 600;
+    transition: color 0.2s ease-in-out;
 }
 
 .main-menu > li ~ li {
@@ -108,6 +110,7 @@ header {
 
 .slider {
     height: 100%;
+    position: relative;
 }
 
 .slide {
@@ -143,6 +146,16 @@ header {
     transform: translateX(0) rotate(0);
 }
 
+.dish-name,
+.dish-description {
+    overflow: hidden;
+    /* overflow-x: visible; */
+}
+
+.dish-name {
+    width: max-content;
+}
+
 .dish-name > h1 {
     font-family: BerlinSans;
     text-transform: capitalize;
@@ -156,6 +169,17 @@ header {
     line-height: 36px;
 }
 
+.dish-name > h1,
+.dish-description > p {
+    transform: translateY(-100%);
+    transition: transform 0.9s ease-in-out;
+}
+
+.slide.active .dish-name > h1,
+.slide.active .dish-description > p {
+    transform: translateY(0);
+}
+
 .dish-description,
 .btn {
     margin-top: 60px;
@@ -166,20 +190,25 @@ header {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--txt-color);
-    width: 336px;
+    color: var(--main-color);
+    overflow: hidden;
+    width: 0;
     height: 80px;
-    border-radius: 40px;
+    border-radius: 0;
     background-color: var(--main-color);
     font-family: Bauhaus93;
     font-size: 30px;
     text-transform: uppercase;
-    box-shadow: 0 0 54px 6px #000;
-    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 54px 2px #4e4e4e;
+    transition: transform 0.2s ease-in-out, width 0.6s ease-in-out,
+        color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    transition-delay: 0s, 0.9s, 1.5s, 1.5s;
 }
 
-.btn:hover {
-    transform: translateY(-10px);
+.slide.active .btn {
+    width: 336px;
+    color: var(--txt-color);
+    border-radius: 40px;
 }
 
 .slider-control {
@@ -209,6 +238,149 @@ header {
     transition: transform 0.3s ease-in-out;
 }
 
-.slider-control-item:hover > img {
-    transform: translateY(-10px) rotate(10deg);
+.mb-menu-toggle {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+@media (hover: hover) {
+    .slider-control-item:hover > img {
+        transform: translateY(-20px) rotate(10deg);
+    }
+
+    .btn:hover {
+        transform: translateY(-10px);
+    }
+
+    .main-menu a:hover {
+        color: var(--main-color);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    :root {
+        --header-size: 50px;
+    }
+
+    header {
+        padding-left: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mb-menu-toggle {
+        display: block;
+    }
+
+    .logo {
+        width: unset;
+        height: 100%;
+        padding: 10px;
+        margin: unset;
+    }
+
+    .logo > img {
+        height: 100%;
+    }
+
+    .main-menu {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        width: 100%;
+        height: calc(100vh - var(--header-size));
+        flex-direction: column;
+        padding: 20px 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: left 0.3s ease-in-out;
+    }
+
+    .main-menu.active {
+        left: 0;
+    }
+
+    .main-menu > li ~ li {
+        margin-left: unset;
+        margin-top: 20px;
+    }
+
+    .main-menu a {
+        font-size: 20px;
+    }
+
+    .hero-content {
+        padding-left: 10px;
+    }
+
+    .slide.active {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .dish-info,
+    .dish-img {
+        width: unset;
+    }
+
+    .dish-info {
+        height: 45%;
+    }
+
+    .dish-img {
+        height: 55%;
+    }
+
+    .dish-img {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .dish-img > img {
+        height: 100%;
+        width: unset;
+        position: unset;
+        top: unset;
+        left: unset;
+    }
+
+    .dish-name > h1 {
+        font-size: 50px;
+    }
+
+    .dish-description > p {
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    .dish-description,
+    .btn {
+        margin-top: 10px;
+    }
+
+    .btn {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    .slide.active .btn {
+        width: 150px;
+    }
+
+    .slider-control {
+        right: 10px;
+        bottom: 0;
+        left: unset;
+        transform: unset;
+    }
+
+    .slider-control-item {
+        --size: 50px;
+    }
+
+    .slider-control-item ~ .slider-control-item {
+        margin-left: 5px;
+    }
 }

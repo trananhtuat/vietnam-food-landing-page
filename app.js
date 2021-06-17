@@ -34,3 +34,7 @@ showSlide(slide_index)
 // setInterval(() => {
 //     nextSlide()
 // }, 1000);
+
+document.querySelector('#mb-menu-toggle').addEventListener('click', () => {
+    document.querySelector('#main-menu').classList.toggle('active')
+})
