@@ -7,8 +7,8 @@ let slides = slider.querySelectorAll('.slide')
 let slide_index = 0
 
 let hero_bgs = [
-    './images/bun-bo-bg.png',
-    './images/pho-ga-bg.png',
+    './images/bun-bo-bg.jpg',
+    './images/pho-ga-bg.jpg',
     './images/goi-cuon-bg.jpg'
 ]
 
