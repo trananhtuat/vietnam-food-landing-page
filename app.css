@@ -1,3 +1,5 @@
+/* setup fonts */
+
 @font-face {
     font-family: BerlinSans;
     src: url(./fonts/BerlinSansFBDemiBold/BerlinSansFBDemiBold.ttf);
@@ -22,6 +24,7 @@
     --main-color: #39b54a;
     --body-bg: #000;
     --txt-color: #fffefe;
+
     --header-size: 127px;
     --logo-size: 214px;
 }
@@ -34,7 +37,7 @@
 }
 
 body {
-    background-color: #000;
+    background-color: var(--body-bg);
     color: var(--txt-color);
     font-family: MyriadProRegular;
 }
@@ -48,7 +51,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     z-index: 99;
 }
 
@@ -73,7 +76,6 @@ header {
     color: var(--txt-color);
     text-transform: capitalize;
     font-size: 30px;
-    font-weight: 600;
     transition: color 0.2s ease-in-out;
 }
 
@@ -81,23 +83,27 @@ header {
     margin-left: 74px;
 }
 
+.mb-menu-toggle {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
 .hero {
     position: relative;
     height: 100vh;
+    padding-left: 98px;
+    overflow: hidden;
     padding-top: var(--header-size);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex; */
-    padding-left: 98px;
-    overflow: hidden;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background-color: #000;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -117,13 +123,13 @@ header {
     opacity: 0;
     visibility: hidden;
     height: 0;
+    display: flex;
 }
 
 .slide.active {
-    height: 100%;
-    display: flex;
     opacity: 1;
     visibility: visible;
+    height: 100%;
 }
 
 .dish-info,
@@ -134,7 +140,6 @@ header {
 
 .dish-img > img {
     position: absolute;
-    /* width: 100%; */
     width: calc(100% + 568px);
     top: -235px;
     left: -200px;
@@ -146,17 +151,11 @@ header {
     transform: translateX(0) rotate(0);
 }
 
-.dish-name,
-.dish-description {
-    overflow: hidden;
-    /* overflow-x: visible; */
-}
-
 .dish-name {
     width: max-content;
 }
 
-.dish-name > h1 {
+.dish-name > h2 {
     font-family: BerlinSans;
     text-transform: capitalize;
     font-size: 290px;
@@ -169,19 +168,23 @@ header {
     line-height: 36px;
 }
 
-.dish-name > h1,
+.dish-name,
+.dish-description {
+    overflow: hidden;
+}
+.dish-name > h2,
 .dish-description > p {
     transform: translateY(-100%);
     transition: transform 0.9s ease-in-out;
 }
 
-.slide.active .dish-name > h1,
+.slide.active .dish-name > h2,
 .slide.active .dish-description > p {
     transform: translateY(0);
 }
 
 .dish-description,
-.btn {
+.slide .btn {
     margin-top: 60px;
 }
 
@@ -213,20 +216,19 @@ header {
 
 .slider-control {
     display: flex;
-    width: max-content;
     position: absolute;
-    z-index: 98;
-    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 98;
 }
 
 .slider-control-item {
     --size: 80px;
     width: var(--size);
     height: var(--size);
-    border-radius: 50%;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 .slider-control-item ~ .slider-control-item {
@@ -238,23 +240,18 @@ header {
     transition: transform 0.3s ease-in-out;
 }
 
-.mb-menu-toggle {
-    position: absolute;
-    right: 10px;
-    display: none;
-}
-
 @media (hover: hover) {
+    /* put hover css here */
+    .main-menu a:hover {
+        color: var(--main-color);
+    }
+
     .slider-control-item:hover > img {
         transform: translateY(-20px) rotate(10deg);
     }
 
     .btn:hover {
         transform: translateY(-10px);
-    }
-
-    .main-menu a:hover {
-        color: var(--main-color);
     }
 }
 
@@ -268,10 +265,6 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .mb-menu-toggle {
-        display: block;
     }
 
     .logo {
@@ -310,12 +303,15 @@ header {
         font-size: 20px;
     }
 
+    .mb-menu-toggle {
+        display: block;
+    }
+
     .hero-content {
         padding-left: 10px;
     }
 
-    .slide.active {
-        display: flex;
+    .slide {
         flex-direction: column-reverse;
     }
 
@@ -346,7 +342,7 @@ header {
         left: unset;
     }
 
-    .dish-name > h1 {
+    .dish-name > h2 {
         font-size: 50px;
     }
 
@@ -356,7 +352,7 @@ header {
     }
 
     .dish-description,
-    .btn {
+    .slide .btn {
         margin-top: 10px;
     }
 
